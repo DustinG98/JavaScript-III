@@ -149,14 +149,23 @@ Humanoid.prototype.greet = function(){
 
   Hero.prototype = Object.create(GameObject.prototype);
   Hero.prototype.constructor = Hero;
-  Hero.prototype.removeHP = function(){
+  Hero.prototype.slash = function(){
     this.healthPoints--;
-    console.log(`${this.name} took 1 point of damage. New HP is ${this.healthPoints}`);
+    console.log(`${this.name} GOT STABBED! New HP is ${this.healthPoints}`);
     if(this.healthPoints === 0){
       return this.destroy();
     }
   }
 
+  Villian.prototype = Object.create(GameObject.prototype);
+  Villian.prototype.constructor = Villian;
+  Villian.prototype.shoot = function(){
+    this.healthPoints = this.healthPoints - 5;
+    console.log(`${this.name} HAS BEEN SHOT! New HP is ${this.healthPoints}`);
+    if(this.healthPoints === 0){
+      return this.destroy();
+    }
+  }
 
   const superMan = new Hero({
     createdAt: new Date(),
@@ -165,14 +174,30 @@ Humanoid.prototype.greet = function(){
       width: 1,
       height: 1,
     },
-    healthPoints: 1,
+    healthPoints: 5,
     name: 'Bruce',
     team: 'Mage Guild',
     weapons: [
-      'Staff of Shamalama',
+      'Knife',
+    ],
+    language: 'Common Tongue',
+  });
+  const lexLuthor = new Villian({
+    createdAt: new Date(),
+    dimensions: {
+      length: 2,
+      width: 1,
+      height: 1,
+    },
+    healthPoints: 5,
+    name: 'Lex Luthor',
+    team: 'Mage Guild',
+    weapons: [
+      'Gun',
     ],
     language: 'Common Tongue',
   });
 
 
-  console.log(superMan.removeHP());
+  console.log(superMan.slash());
+  console.log(lexLuthor.shoot());
