@@ -149,21 +149,21 @@ Humanoid.prototype.greet = function(){
 
   Hero.prototype = Object.create(GameObject.prototype);
   Hero.prototype.constructor = Hero;
-  Hero.prototype.slash = function(){
-    this.healthPoints--;
-    console.log(`${this.name} GOT STABBED! New HP is ${this.healthPoints}`);
-    if(this.healthPoints === 0){
-      return this.destroy();
+  Hero.prototype.slash = function(villian){
+    villian.healthPoints--;
+    console.log(`${villian.name} GOT STABBED BY ${this.name}! New HP is ${villian.healthPoints}`);
+    if(villian.healthPoints === 0){
+      console.log(villian.destroy());
     }
   }
 
   Villian.prototype = Object.create(GameObject.prototype);
   Villian.prototype.constructor = Villian;
-  Villian.prototype.shoot = function(){
-    this.healthPoints = this.healthPoints - 5;
-    console.log(`${this.name} HAS BEEN SHOT! New HP is ${this.healthPoints}`);
-    if(this.healthPoints === 0){
-      return this.destroy();
+  Villian.prototype.shoot = function(hero){
+    hero.healthPoints = hero.healthPoints - 5;
+    console.log(`${hero.name} HAS BEEN SHOT BY ${this.name}! New HP is ${hero.healthPoints}`);
+    if(hero.healthPoints === 0){
+      console.log(hero.destroy());
     }
   }
 
@@ -199,5 +199,8 @@ Humanoid.prototype.greet = function(){
   });
 
 
-  console.log(superMan.slash());
-  console.log(lexLuthor.shoot());
+superMan.slash(lexLuthor);
+superMan.slash(lexLuthor);
+superMan.slash(lexLuthor);
+superMan.slash(lexLuthor);
+lexLuthor.shoot(superMan);
