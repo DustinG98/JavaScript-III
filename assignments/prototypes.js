@@ -175,7 +175,7 @@ Humanoid.prototype.greet = function(){
       height: 1,
     },
     healthPoints: 5,
-    name: 'Bruce',
+    name: 'Clark Kent',
     team: 'Mage Guild',
     weapons: [
       'Knife',
