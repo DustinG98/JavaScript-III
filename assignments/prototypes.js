@@ -136,3 +136,43 @@ Humanoid.prototype.greet = function(){
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+
+  function Villian (attr){
+    Humanoid.call(this, attr);
+  }
+
+
+  function Hero (attr){
+    Humanoid.call(this, attr);
+  }
+
+  Hero.prototype = Object.create(GameObject.prototype);
+  Hero.prototype.constructor = Hero;
+  Hero.prototype.removeHP = function(){
+    this.healthPoints--;
+    console.log(`${this.name} took 1 point of damage. New HP is ${this.healthPoints}`);
+    if(this.healthPoints === 0){
+      return this.destroy();
+    }
+  }
+
+
+  const superMan = new Hero({
+    createdAt: new Date(),
+    dimensions: {
+      length: 2,
+      width: 1,
+      height: 1,
+    },
+    healthPoints: 1,
+    name: 'Bruce',
+    team: 'Mage Guild',
+    weapons: [
+      'Staff of Shamalama',
+    ],
+    language: 'Common Tongue',
+  });
+
+
+  console.log(superMan.removeHP());
